@@ -22,7 +22,7 @@ export type Advertisement = {
 const app = express();
 const PORT = process.env.PORT;
 
-app.get("/", async (request: Request, response: Response) => {
+app.get("/get-offers", async (request: Request, response: Response) => {
   const result = await x();
   const resultString = `Current offer count: ${result.liveOffers}; new offers: ${result.new}`;
   response.status(200).send(resultString);
@@ -98,3 +98,5 @@ const x = async () => {
     liveOffers: mappedLiveOffers.length,
   };
 };
+
+module.exports = app;
