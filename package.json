@@ -1,0 +1,29 @@
+{
+  "name": "apartment-alert",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier . --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "@types/mongodb": "4.0.6",
+    "dotenv": "16.4.7",
+    "express": "4.21.2",
+    "mongodb": "6.13.0",
+    "puppeteer": "24.2.1",
+    "resend": "4.1.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "6.1.1",
+    "@types/express": "5.0.0",
+    "@types/puppeteer": "5.4.7",
+    "prettier": "3.5.1",
+    "typescript": "5.7.3"
+  }
+}
