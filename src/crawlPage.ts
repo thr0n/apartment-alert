@@ -1,35 +1,31 @@
-import puppeteer from "puppeteer";
+import axios from "axios";
+import * as cheerio from "cheerio";
+import { Advertisement } from "..";
 
 export const getCurrentLiveOffers = async () => {
   const HOST_NAME = process.env.HOST_NAME;
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
 
-  await page.goto(`https://${HOST_NAME}/vermietung/`);
-  await page.setViewport({ width: 1080, height: 1024 });
+  const page = await axios.get(`https://${HOST_NAME}/vermietung/`);
+  const $ = cheerio.load(page.data);
 
-  const paragraphs = await page.$$(".elementor-post");
-  console.log(`Im Moment gibt es ${paragraphs.length} Angebote:\n`);
-
-  const mappedLiveOffers = await Promise.all(
-    Object.values(paragraphs).map(async (paragraph) => {
-      const hyperlink = await paragraph.$eval("a", (el) =>
-        el.getAttribute("href"),
-      );
-      const text = await paragraph.$eval(
-        "div.elementor-post__text h3",
-        (el) => el.innerText,
-      );
-
-      return {
-        hyperlink,
-        text,
-      };
-    }),
+  const offers = $(".elementor-post__card .elementor-post__title");
+  console.log(
+    `Im Moment gibt es ${offers.length} Angebot${offers.length > 1 ? "e" : ""}:\n`,
   );
-  console.log(mappedLiveOffers);
 
-  browser.close();
+  const mappedLiveOffers: Advertisement[] = [];
+  offers.each((_, element) => {
+    const text = $(element).text().trim();
+    const href = $(element).find("a").attr("href") || "";
+
+    mappedLiveOffers.push({
+      href,
+      title: text,
+      found: Date.now(),
+    });
+  });
+
+  console.log(mappedLiveOffers);
 
   return mappedLiveOffers;
 };

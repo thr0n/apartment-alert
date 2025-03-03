@@ -1,5 +1,3 @@
-import puppeteer from "puppeteer";
-
 import "dotenv/config";
 
 const DB_USER = process.env.DB_USER;
@@ -52,14 +50,14 @@ const x = async () => {
   const alertDb = client.db("aparment-alert");
   const advertisements = alertDb.collection("advertisements");
 
-  const mappedLiveOffers = await getCurrentLiveOffers();
+  const mappedLiveOffers: Advertisement[] = await getCurrentLiveOffers();
+  console.log(mappedLiveOffers);
 
   const allOffers = await Promise.all(
     mappedLiveOffers.map(async (liveOffer) => {
       const findResult = await advertisements.findOne({
-        title: liveOffer.text,
+        title: liveOffer.title,
       });
-      console.log(findResult);
 
       if (findResult != null)
         return {
@@ -68,10 +66,9 @@ const x = async () => {
           found: findResult.found,
         };
 
-      console.log("New advertisement!");
       const doc: Advertisement = {
-        title: liveOffer.text,
-        href: liveOffer.hyperlink,
+        title: liveOffer.title,
+        href: liveOffer.href,
         found: foundDate,
       };
       const result = await advertisements.insertOne(doc);

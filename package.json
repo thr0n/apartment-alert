@@ -14,10 +14,11 @@
   "description": "",
   "dependencies": {
     "@types/mongodb": "4.0.6",
+    "axios": "1.7.9",
+    "cheerio": "1.0.0",
     "dotenv": "16.4.7",
     "express": "4.21.2",
     "mongodb": "6.13.0",
-    "puppeteer": "24.2.1",
     "resend": "4.1.2"
   },
   "devDependencies": {
