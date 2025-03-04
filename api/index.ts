@@ -26,9 +26,9 @@ app.get("/get-offers", async (request: Request, response: Response) => {
   response.status(200).send(resultString);
 });
 
-app.get("/", (request: Request, response: Response) => {
-  response.status(200)
-})
+app.get("*", (request: Request, response: Response) => {
+  response.status(200);
+});
 
 app
   .listen(PORT, () => {

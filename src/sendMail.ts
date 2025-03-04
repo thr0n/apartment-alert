@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { Advertisement } from "..";
+import { Advertisement } from "../api";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 

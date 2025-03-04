@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { Advertisement } from "..";
+import { Advertisement } from "../api";
 
 export const getCurrentLiveOffers = async () => {
   const HOST_NAME = process.env.HOST_NAME;
