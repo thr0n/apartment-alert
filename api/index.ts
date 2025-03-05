@@ -89,7 +89,7 @@ const x = async () => {
 
   if (newDbEntries.length > 0) {
     console.log("New offers! Message to recepients will be send");
-    sendMail(newDbEntries);
+    await sendMail(newDbEntries);
   }
 
   client.close();

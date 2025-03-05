@@ -9,11 +9,11 @@
   "crons": [
     {
       "path": "/get-offers",
-      "schedule": "0 10 * * *"
+      "schedule": "0 9 * * *"
     },
     {
       "path": "/get-offers",
-      "schedule": "0 16 * * *"
+      "schedule": "0 15 * * *"
     }
   ]
 }
